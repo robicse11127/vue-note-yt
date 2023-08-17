@@ -20,6 +20,32 @@ export const useNoteStore = defineStore( 'noteStore', {
 			return state.notes.filter( note => note.pinned );
 		}
 	},
-	
+	actions: {
+		markedAsPinned( id ) {
+			const updateNotes = this.notes.map( item => {
+				if ( id === item.id ) {
+					item.pinned = true;
+					return item;
+				}
+
+				return item;
+			} );
+
+			this.notes = updateNotes;
+		},
+
+		markedAsUnPinned( id ) {
+			const updateNotes = this.notes.map( item => {
+				if ( id === item.id ) {
+					item.pinned = false;
+					return item;
+				}
+
+				return item;
+			} );
+
+			this.notes = updateNotes;
+		}
+	}
 
 } );

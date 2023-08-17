@@ -12,6 +12,8 @@ const props = defineProps( [ 'notes', 'title', 'icon', 'type' ] );
 	<ul class="rs__note-list" v-if="'list' === type" >
 		<li v-for="note in notes" :key="note.id">
 			<p>{{ note.title }}</p>
+			<span v-if="note.pinned" @click="noteStore.markedAsUnPinned( note.id )"  className="rs__note-list-icon material-symbols-sharp">do_not_disturb_on</span>
+			<span v-if="! note.pinned" @click="noteStore.markedAsPinned( note.id )" className="rs__note-list-icon material-symbols-sharp">push_pin</span>
 		</li>
 	</ul>
 </template>
