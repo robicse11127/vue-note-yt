@@ -3,13 +3,8 @@ import { defineStore } from 'pinia';
 export const useNoteStore = defineStore( 'noteStore', {
 
 	state: () => ({
-		notes: [
-			{ id: 1, title: 'Note title one', conent: 'Note one content', timestamp: Date.now(), pinned: false },
-			{ id: 2, title: 'Note title two', conent: 'Note two content', timestamp: Date.now(), pinned: true },
-			{ id: 3, title: 'Note title three', conent: 'Note three content', timestamp: Date.now(), pinned: true },
-			{ id: 4, title: 'Note title four', conent: 'Note four content', timestamp: Date.now(), pinned: false },
-			{ id: 5, title: 'Note title five', conent: 'Note five content', timestamp: Date.now(), pinned: false },
-		]
+		notes: [],
+		lastNoteID: ''
 	}),
 	getters: {
 		allNotes: ( state ) => {
@@ -21,6 +16,12 @@ export const useNoteStore = defineStore( 'noteStore', {
 		}
 	},
 	actions: {
+
+		addNote( note ) {
+			const newNotesArr = [ note, ...this.notes ];
+			this.notes = newNotesArr;
+		},
+
 		markedAsPinned( id ) {
 			const updateNotes = this.notes.map( item => {
 				if ( id === item.id ) {
